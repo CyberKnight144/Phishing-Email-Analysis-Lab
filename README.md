@@ -136,15 +136,27 @@ The following screenshots document key stages of the phishing email investigatio
 ### 1. Suspicious Email Analysis
 Evidence of the phishing email, including the impersonation attempt, suspicious sender information, and social-engineering language.
 
+![Phishing email header showing suspicious sender information](Screenshots/01-phishing-email-header.png)
+
 ### 2. Email Header Analysis
 Analysis of the email headers revealed the lookalike `micros0ft-support.example` domain, missing DKIM authentication, and failed DMARC authentication.
+
+![Phishing email body showing urgency and social-engineering language](Screenshots/02-phishing-email-body.png)
 
 ### 3. IOC Analysis
 Indicators including the suspicious domain, hostname, IP address, and URL were extracted and documented for further investigation.
 
+![IOC analysis showing extracted phishing indicators](Screenshots/03-ioc-analysis.png)
+
 ### 4. Threat Intelligence Analysis
 VirusTotal was used to investigate the identified indicators and gather additional threat-intelligence information.
 
+
+![Identified phishing indicators including domain IP address and URL](Screenshots/04-identified-iocs.png)
+
 ### 5. Incident Report
 A SOC incident report was created documenting the initial triage, email details, header analysis, threat-intelligence findings, final verdict, and recommended response actions.
-- 
+
+![Email authentication analysis showing SPF DKIM and DMARC results](Screenshots/05-email-authentication-analysis.png)
+
+
