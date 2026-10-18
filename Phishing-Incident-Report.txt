@@ -1,0 +1,299 @@
+
+PHISHING EMAIL INCIDENT REPORT
+
+Analyst: Elmar Sims
+Investigation Date: September 13, 2026
+Incident Type: Phishing Email
+Severity: High
+Status: Investigated
+Final Classification: Phishing - Credential Harvesting
+Confidence: High
+
+--------------------------------------------------
+1. INCIDENT SUMMARY
+--------------------------------------------------
+
+A suspicious email claiming to originate from Microsoft 365 Security
+was analyzed after being identified as a potential phishing message.
+
+The email attempted to pressure the recipient into verifying their
+Microsoft 365 account by threatening account suspension within
+24 hours.
+
+Analysis identified multiple phishing indicators, including a
+lookalike sender domain, suspicious credential-verification URL,
+failed SPF and DMARC authentication, absence of DKIM authentication,
+and urgency-based social engineering.
+
+Based on the combined evidence, the message was classified as a
+high-confidence credential phishing attempt.
+
+--------------------------------------------------
+2. EMAIL DETAILS
+--------------------------------------------------
+
+Claimed Sender:
+Microsoft 365 Security
+
+Sender Address:
+security@micros0ft-support.example
+
+Recipient:
+employee@company.example
+
+Subject:
+URGENT: Your Microsoft 365 Account Will Be Suspended
+
+Return-Path:
+notifications@micros0ft-support.example
+
+Source Mail Server:
+mail.micros0ft-support.example
+
+Source IP Address:
+192.0.2.45
+
+Embedded URL:
+https://login-microsoft365.example/verify
+
+Email Authentication:
+SPF: FAIL
+DKIM: NONE
+DMARC: FAIL
+
+
+--------------------------------------------------
+3. INITIAL TRIAGE
+--------------------------------------------------
+
+During initial review, the email displayed several characteristics
+commonly associated with phishing and social-engineering attacks.
+
+Finding 1 - Lookalike Sender Domain:
+The sender used "micros0ft-support.example," replacing the letter
+"o" in Microsoft with the number "0." This is consistent with a
+typosquatting technique intended to make a fraudulent domain appear
+similar to a legitimate brand.
+
+Finding 2 - Urgency and Fear:
+The subject and message threatened that the recipient's Microsoft 365
+account would be suspended within 24 hours. This language attempts to
+pressure the recipient into making a rushed decision.
+
+Finding 3 - Suspicious Verification URL:
+The email instructed the recipient to verify the account using
+"https://login-microsoft365.example/verify." The URL contains Microsoft
+branding but does not use an official Microsoft-owned domain.
+
+Finding 4 - Credential-Theft Indicators:
+The message attempted to direct the recipient to an external
+verification page. Based on the context of the email, the likely
+objective was to convince the recipient to enter account credentials.
+
+Initial Assessment:
+Suspicious - Further investigation required.
+
+
+--------------------------------------------------
+4. HEADER AND AUTHENTICATION ANALYSIS
+--------------------------------------------------
+
+The email headers were reviewed to determine the originating
+infrastructure and email authentication results.
+
+Received Header:
+The message indicated that it originated from:
+
+mail.micros0ft-support.example [192.0.2.45]
+
+The IP address 192.0.2.45 belongs to the TEST-NET-1 documentation
+range and is being used as a controlled indicator for this lab.
+
+SPF Analysis:
+Result: FAIL
+
+The sending server was not authorized under the SPF policy evaluated
+for the sender identity. This authentication failure increased the
+suspicion associated with the message.
+
+DKIM Analysis:
+Result: NONE
+
+No DKIM authentication was present for the message. The absence of
+DKIM alone does not prove that an email is malicious, but it provided
+additional context when combined with the other indicators.
+
+DMARC Analysis:
+Result: FAIL
+
+DMARC authentication/alignment requirements were not satisfied for
+the domain presented in the From header.
+
+Authentication Summary:
+
+SPF:   FAIL
+DKIM:  NONE
+DMARC: FAIL
+
+Analyst Assessment:
+The authentication results, when correlated with the lookalike sender
+domain, suspicious URL, and social-engineering content, further
+supported the phishing classification.
+
+--------------------------------------------------
+5. IOC AND THREAT INTELLIGENCE ANALYSIS
+--------------------------------------------------
+
+Indicators extracted from the email were reviewed using VirusTotal
+to gather additional reputation and threat-intelligence context.
+
+Sender Domain:
+micros0ft-support.example
+
+VirusTotal Result:
+No information was available for the queried domain.
+
+Assessment:
+The absence of reputation information does not establish that the
+domain is safe. The domain remained suspicious because of its
+lookalike spelling and the other phishing indicators identified
+during the investigation.
+
+
+Source IP:
+192.0.2.45
+
+VirusTotal Result:
+0/89 security vendors flagged the IP address as malicious.
+
+Additional Context:
+192.0.2.45 belongs to the TEST-NET-1 documentation address range and
+was intentionally used as a controlled indicator in this lab.
+
+Assessment:
+No malicious reputation was established for the IP. VirusTotal
+relationship information alone was not considered sufficient evidence
+to classify the IP as malicious.
+
+
+Embedded URL:
+https://login-microsoft365.example/verify
+
+VirusTotal Result:
+Item not found.
+
+Assessment:
+The lack of VirusTotal reputation information does not establish that
+the URL is safe. The URL remained suspicious because it attempted to
+resemble a Microsoft 365 login address while not using an official
+Microsoft-owned domain.
+
+
+Threat Intelligence Conclusion:
+Threat-intelligence results were considered supporting context rather
+than the sole basis for the verdict. The final classification was
+determined by correlating the sender domain, URL characteristics,
+email authentication results, message content, and social-engineering
+techniques.
+
+--------------------------------------------------
+6. FINAL ANALYST VERDICT
+--------------------------------------------------
+
+Final Classification:
+PHISHING - CREDENTIAL HARVESTING
+
+Severity:
+HIGH
+
+Confidence:
+HIGH
+
+Likely Objective:
+Credential Theft
+
+Analyst Verdict:
+
+The email was determined to be a simulated credential-phishing
+attempt designed to impersonate Microsoft 365 Security and pressure
+the recipient into visiting a fraudulent account-verification page.
+
+The classification was based on multiple correlated indicators:
+
+- Lookalike sender domain using "micros0ft" instead of "microsoft"
+- Suspicious Microsoft-themed verification URL
+- SPF authentication failure
+- No DKIM authentication present
+- DMARC authentication failure
+- Urgency and account-suspension language
+- Attempt to direct the recipient to an external verification page
+
+VirusTotal did not establish malicious reputation for the controlled
+lab indicators. However, absence of reputation data does not override
+the behavioral, authentication, and social-engineering evidence
+identified during the investigation.
+
+Final Disposition:
+TRUE POSITIVE - PHISHING
+
+
+
+--------------------------------------------------
+7. RECOMMENDED RESPONSE ACTIONS
+--------------------------------------------------
+
+Based on the investigation findings, the following response actions
+are recommended:
+
+1. Email Containment
+   - Quarantine or remove the phishing email from the recipient's
+     mailbox.
+   - Search the email environment for additional recipients who may
+     have received the same or similar message.
+
+2. Indicator Blocking
+   - Block confirmed malicious sender addresses, domains, and URLs
+     using appropriate email and security controls.
+   - Do not block 192.0.2.45 based on this lab investigation because
+     it is a reserved TEST-NET-1 documentation address.
+
+3. User Investigation
+   - Determine whether the recipient clicked the suspicious URL.
+   - Determine whether credentials or other sensitive information
+     were submitted.
+
+4. Account Containment
+   - If credential compromise is confirmed, reset the affected user's
+     password.
+   - Revoke active sessions and investigate the account for
+     unauthorized access.
+   - Review authentication activity for suspicious logins.
+
+5. Threat Hunting
+   - Search security logs and email telemetry for the identified
+     phishing indicators and similar messages.
+   - Investigate any additional affected users or endpoints.
+
+6. User Awareness
+   - Inform the affected user of the phishing attempt.
+   - Reinforce reporting procedures and awareness of lookalike
+     domains, suspicious links, and urgency-based social engineering.
+
+--------------------------------------------------
+INCIDENT CLOSURE
+--------------------------------------------------
+
+Disposition:
+TRUE POSITIVE - SIMULATED PHISHING
+
+Incident Status:
+CLOSED - ANALYSIS COMPLETE
+
+The simulated phishing email was successfully identified, analyzed,
+documented, and classified. No real malicious infrastructure was
+accessed during this lab.
+
+
+
+
+Phishing-Incident-Report.txt
