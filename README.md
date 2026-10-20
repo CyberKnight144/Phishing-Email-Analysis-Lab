@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project demonstrates a Tier 1 SOC Analyst workflow for investigating a suspicious phishing email. The investigation included analyzing email headers, identifying indicators of compromise (IOCs), examining authentication results, researching suspicious infrastructure using threat intelligence tools, and documenting the findings in an incident report.
+This project demonstrates a SOC Analyst workflow for investigating a suspicious phishing email. The investigation included analyzing email headers, identifying indicators of compromise (IOCs), examining authentication results, researching suspicious infrastructure using threat intelligence tools, and documenting the findings in an incident report.
 
 ## Objectives
 
